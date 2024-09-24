@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';  // Import ToastContainer and toast
-import 'react-toastify/dist/ReactToastify.css';          // Import styles for react-toastify
+import { ToastContainer, toast } from 'react-toastify';  
+import 'react-toastify/dist/ReactToastify.css';         
 import './login.css';
 
 const Checkout = () => {
@@ -110,21 +110,20 @@ const Checkout = () => {
                 .request(config)
                 .then((response) => {
                     console.log(JSON.stringify(response.data));
-                    toast.success('Payment successful!');  // Show success message
+                    toast.success('Payment successful!');  
                 })
                 .catch((error) => {
                     console.log(error);
-                    toast.error('An error occurred while processing the payment.');  // Show error message
+                    toast.error('An error occurred while processing the payment.'); 
                 });
         } else {
-            // Show error message for invalid fields
             toast.error('Please fill all the fields correctly.');
         }
     };
 
     return (
         <div className="checkout-container">
-            <ToastContainer />  {/* Toast notification container */}
+            <ToastContainer />  
             <div className="checkout-box">
                 <h2>Checkout</h2>
 
