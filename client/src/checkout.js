@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';  // Import ToastContainer and toast
+import 'react-toastify/dist/ReactToastify.css';          // Import styles for react-toastify
 import './login.css';
 
 const Checkout = () => {
@@ -10,7 +12,7 @@ const Checkout = () => {
     const [cvv, setCvv] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
     const [errors, setErrors] = useState({});
-    const [touched, setTouched] = useState({}); // Track touched fields
+    const [touched, setTouched] = useState({});
 
     const navigate = useNavigate();
 
@@ -92,7 +94,7 @@ const Checkout = () => {
                 cardNumber,
                 cvv,
                 expiryDate,
-                totalAmount : 100
+                totalAmount: 100
             });
 
             const config = {
@@ -108,16 +110,21 @@ const Checkout = () => {
                 .request(config)
                 .then((response) => {
                     console.log(JSON.stringify(response.data));
-                    navigate("/success"); 
+                    toast.success('Payment successful!');  // Show success message
                 })
                 .catch((error) => {
                     console.log(error);
+                    toast.error('An error occurred while processing the payment.');  // Show error message
                 });
+        } else {
+            // Show error message for invalid fields
+            toast.error('Please fill all the fields correctly.');
         }
     };
 
     return (
         <div className="checkout-container">
+            <ToastContainer />  {/* Toast notification container */}
             <div className="checkout-box">
                 <h2>Checkout</h2>
 
